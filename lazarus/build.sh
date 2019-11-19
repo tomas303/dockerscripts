@@ -12,4 +12,8 @@ elif [ "$cmd" = "3" ]; then
 	docker build -f Dockerfile.3 -t lazthree .
 elif [ "$cmd" = "4" ]; then
 	docker build -f Dockerfile.4 -t lazfour .
+elif [ "$cmd" = "5" ]; then
+	docker build -f Dockerfile.5 -t lazfive .
+elif [ "$cmd" = "6" ]; then
+	docker build -f Dockerfile.6 -t lazsix .
 fi

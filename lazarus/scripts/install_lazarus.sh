@@ -26,33 +26,14 @@ function Lin64RunConfiguration
   echo '    </CompilerFilename>' >> $mEnvOpt
   echo '    <FPCSourceDirectory Value="'$FPCSourceDir'"/>' >> $mEnvOpt
   echo '    <DebuggerFilename Value="gdb"/>' >> $mEnvOpt
-
-    <Debugger Class="TGDBMIDebugger">
-      <ClassTGDBMIDebugger>
-        <Config ConfigClass="TGDBMIDebugger" Active="True" UID="{8CF04D2B-CA62-4D7A-BB41-6FF4179CB98A}"/>
-      </ClassTGDBMIDebugger>
-      <WatchesDlg ColumnNameWidth="-1" ColumnValueWidth="-1"/>
-      <CallStackDlg ViewCount="0"/>
-    </Debugger>
-
-
-
-
   echo '  </EnvironmentOptions>' >> $mEnvOpt
   echo '</CONFIG>' >> $mEnvOpt
-  popd
-
-  # launch batch
-  pushd $mRunDir
-  echo "#!/bin/bash" > run.sh
-  echo "$LazarusTargetLinDir/bin/startlazarus    --primary-config-path=$mRunConfigDir" >> run.sh
-  chmod a+x ./run.sh
   popd
 )
 
 function Lin64Rebuild
 (
-  $LazarusTargetLinDir/bin/lazbuild --primary-config-path=$LazarusTargetLinDir/runlazarus/linux --build-ide= --add-package anchordockingdsgn cody
+  $LazarusTargetLinDir/bin/lazbuild --primary-config-path=$LazarusTargetLinDir/runlazarus/linux --build-ide= --add-package AnchorDocking AnchorDockingDsgn Cody
 )
 
 function Lin64

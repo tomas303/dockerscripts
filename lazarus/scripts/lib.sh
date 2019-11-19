@@ -62,3 +62,19 @@ function lib_run
   if [ $mstatus -ne 0 ]; then exit $mstatus; fi
 }
 
+# function replace text in file
+# $1 - file
+# $2 - searched text
+# $3 - replacement
+function lib_replaceInFile
+(
+  file=$1
+  # shell parameter expansion replace -> /pattern/replacement
+  # if pattern starts with /  -> all occurences are replaced
+  # backslash is escape character
+  # so this expansion just escapes all linux path delimiters
+  from=${2//\//\\\/}
+  to=${3//\//\\\/}
+  lib_run sed -i s/$from/$to/ $file
+)
+
