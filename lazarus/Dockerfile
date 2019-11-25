@@ -47,6 +47,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install xserver-xorg-core && \
 # lazarus is launched via .xsessionrc(actually user is root)
 # minimal configuration for jwm window manager
 RUN cp $ScriptsDir/.xsessionrc /root/ && \
-    cp $ScriptsDir/system.jwmrc /etc/jwm/system.jwmrc
+    cp $ScriptsDir/system.jwmrc /etc/jwm/ && \
+    cp $ScriptsDir/x50-docker /etc/X11/Xresources/
 
 ENTRYPOINT $ScriptsDir/launch_X.sh

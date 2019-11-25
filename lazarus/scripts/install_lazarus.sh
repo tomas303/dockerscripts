@@ -26,6 +26,7 @@ function Lin64RunConfiguration
   echo '    </CompilerFilename>' >> $mEnvOpt
   echo '    <FPCSourceDirectory Value="'$FPCSourceDir'"/>' >> $mEnvOpt
   echo '    <DebuggerFilename Value="gdb"/>' >> $mEnvOpt
+  echo '    <Recent AlreadyPopulated="True"/>' >> $mEnvOpt
   echo '  </EnvironmentOptions>' >> $mEnvOpt
   echo '</CONFIG>' >> $mEnvOpt
   popd

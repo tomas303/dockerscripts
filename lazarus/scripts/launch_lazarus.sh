@@ -4,6 +4,8 @@
 
 source $ScriptsDir/lib.sh
 
+# $LazarusConfigDir is yet to be tested location for config files. One would want
+# to supply it from outside to outlive docker container.
 if [ -z "$LazarusConfigDir" ]
 then
   LazarusConfigDir=$LazarusTargetLinDir/runlazarus/linux

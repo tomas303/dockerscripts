@@ -30,7 +30,7 @@
 
     <!-- Visual Styles -->
     <WindowStyle>
-        <Font>Sans-9:bold</Font>
+        <Font>Sans-12:bold</Font>
         <Width>4</Width>
         <Height>21</Height>
         <Corner>3</Corner>
@@ -46,14 +46,14 @@
         </Active>
     </WindowStyle>
     <TrayStyle group="true" list="all">
-        <Font>Sans-9</Font>
+        <Font>Sans-12</Font>
         <Background>#333333</Background>
         <Foreground>#FFFFFF</Foreground>
         <Outline>#000000</Outline>
         <Opacity>0.75</Opacity>
     </TrayStyle>
     <TaskListStyle>
-      <Font>Sans-9</Font>
+      <Font>Sans-12</Font>
       <Active>
         <Foreground>#FFFFFF</Foreground>
         <Background>#555555</Background>
@@ -72,7 +72,7 @@
         </Active>
     </PagerStyle>
     <MenuStyle>
-        <Font>Sans-9</Font>
+        <Font>Sans-12</Font>
         <Foreground>#FFFFFF</Foreground>
         <Background>#333333</Background>
         <Outline>#000000</Outline>
@@ -83,7 +83,7 @@
         <Opacity>0.85</Opacity>
     </MenuStyle>
     <PopupStyle>
-        <Font>Sans-9</Font>
+        <Font>Sans-12</Font>
         <Foreground>#000000</Foreground>
         <Background>#999999</Background>
     </PopupStyle>
