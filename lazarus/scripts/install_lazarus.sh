@@ -26,6 +26,13 @@ function Lin64RunConfiguration
   echo '    </CompilerFilename>' >> $mEnvOpt
   echo '    <FPCSourceDirectory Value="'$FPCSourceDir'"/>' >> $mEnvOpt
   echo '    <DebuggerFilename Value="gdb"/>' >> $mEnvOpt
+  echo '          <Debugger Class="TGDBMIDebugger">' >> $mEnvOpt
+  echo '            <ClassTGDBMIDebugger>' >> $mEnvOpt
+  echo '              <Config ConfigClass="TGDBMIDebugger" DebuggerFilename="gdb" Active="True" UID="{DA708489-FA43-4A15-B32D-86470CF13920}"/>' >> $mEnvOpt
+  echo '            </ClassTGDBMIDebugger>' >> $mEnvOpt
+  echo '            <WatchesDlg ColumnNameWidth="-1" ColumnValueWidth="-1"/>' >> $mEnvOpt
+  echo '            <CallStackDlg ViewCount="0"/>' >> $mEnvOpt
+  echo '          </Debugger>' >> $mEnvOpt
   echo '    <Recent AlreadyPopulated="True"/>' >> $mEnvOpt
   echo '  </EnvironmentOptions>' >> $mEnvOpt
   echo '</CONFIG>' >> $mEnvOpt
