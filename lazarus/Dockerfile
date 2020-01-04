@@ -11,7 +11,9 @@ MAINTAINER Tomáš Horák <tomashorak@post.cz>
 ENV ScriptsDir=/opt/scripts \
 	LazarusUrl="https://svn.freepascal.org/svn/lazarus/trunk" \
 	LazarusSourceDir=/opt/src/lazarus \
-	LazarusTargetLinDir=/opt/bin/lazarus
+	LazarusTargetLinDir=/opt/bin/lazarus \
+	DockerXDisplay=1 \
+	DockerXTerminal=vt8
 
 
 # Install scripts
