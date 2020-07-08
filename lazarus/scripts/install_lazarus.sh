@@ -41,7 +41,7 @@ function Lin64RunConfiguration
 
 function Lin64Rebuild
 (
-  $LazarusTargetLinDir/bin/lazbuild --primary-config-path=$LazarusTargetLinDir/runlazarus/linux --build-ide= --add-package AnchorDocking AnchorDockingDsgn Cody
+  $LazarusTargetLinDir/bin/lazbuild --primary-config-path=$LazarusTargetLinDir/runlazarus/linux --build-ide= --add-package AnchorDocking AnchorDockingDsgn Cody LazDebuggerFp
 )
 
 function Lin64

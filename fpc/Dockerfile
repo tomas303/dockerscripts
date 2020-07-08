@@ -12,7 +12,7 @@ ENV ScriptsDir=/opt/scripts \
 	FPCUrl="http://svn.freepascal.org/svn/fpc/trunk/" \
 	FPCSourceDir=/opt/src/fpc \
 	FPCTargetLinDir=/opt/bin/fpc \
-    FPCBootstrapVersion=3.0.4 \
+    FPCBootstrapVersion=3.2.0 \
     FPCBootstrapDir=/opt/bootstrap
 
 # Install scripts
