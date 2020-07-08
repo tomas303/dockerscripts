@@ -6,6 +6,7 @@
         <Program icon="/opt/KDevelop.AppImage" label="KDevelop">/opt/squashfs-root/AppRun</Program>
         <Separator/>
         <Program icon="terminal.png" label="Terminal">xterm</Program>
+        <Program icon="rxvt-unicode.png" label="rxvt-unicode">rxvt-unicode</Program>
         <Separator/>
         <Restart label="Restart" icon="restart.png"/>
         <Exit label="Exit" confirm="true" icon="quit.png"/>

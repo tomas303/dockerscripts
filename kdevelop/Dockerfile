@@ -9,7 +9,7 @@ MAINTAINER Tomáš Horák <tomashorak@post.cz>
 # Environment variables
 # -------------------------------------------------------------
 ENV ScriptsDir=/opt/scripts \
-	KDevelopUrl="https://download.kde.org/stable/kdevelop/5.5.0/bin/linux/KDevelop-5.5.0-x86_64.AppImage"
+	KDevelopUrl="https://download.kde.org/stable/kdevelop/5.5.2/bin/linux/KDevelop-5.5.2-x86_64.AppImage"
 
 # Install scripts
 # --------------------
@@ -23,6 +23,7 @@ RUN apt-get update && apt-get -y upgrade && \
 	apt-get -y install build-essential && \
 	apt-get -y install cmake && \
 	apt-get -y install extra-cmake-modules && \
+	apt-get -y install gdb && \
 	apt-get -y install qtbase5-dev && \
 	apt-get -y install kdevelop-dev
 
@@ -40,7 +41,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install xserver-xorg-core && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install fonts-dejavu-core  && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install xinit && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install x11-xserver-utils && \
-	apt-get -y install jwm
+	apt-get -y install jwm && \
+	apt-get -y install xterm && \
+	apt-get -y install rxvt-unicode-256color
+
 
 # for kmymoney build
 RUN apt-get -y install libgpgmepp-dev && \
@@ -56,7 +60,15 @@ RUN apt-get -y install libgpgmepp-dev && \
     apt-get -y install libalkimia5-dev && \
     apt-get -y install libkf5webkit-dev && \
     apt-get -y install libgpg-error-dev && \
-    apt-get -y install libgpgme-dev
+    apt-get -y install libgpgme-dev && \
+    apt-get -y install libkchart-dev && \
+    apt-get -y install libaqbanking-dev && \
+    apt-get -y install libgwenhywfar-core-dev && \
+#    apt-get -y install libgwengui-cpp0 && \
+    apt-get -y install libgwenhywfar-core-dev && \
+    apt-get -y install libgwengui-qt5-dev && \
+    apt-get -y install libkf5package-dev && \
+    apt-get -y install libkf5plasma-dev
 
 
 
