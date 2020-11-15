@@ -6,6 +6,8 @@
         <Program icon="lazarus.png" label="Lazarus">/opt/scripts/launch_lazarus.sh</Program>
         <Separator/>
         <Program icon="terminal.png" label="Terminal">xterm</Program>
+        <Program label="1920x1080">xrandr --output Virtual-1 --mode 1920x1080</Program>
+        <Program label="1600x900">xrandr --output Virtual-1 --mode 1600x900</Program>
         <Separator/>
         <Restart label="Restart" icon="restart.png"/>
         <Exit label="Exit" confirm="true" icon="quit.png"/>

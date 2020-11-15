@@ -42,7 +42,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install xserver-xorg-core && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install fonts-dejavu-core  && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install xinit && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install x11-xserver-utils && \
-	apt-get -y install jwm
+	apt-get -y install jwm && \
+	apt-get -y install xserver-xorg-video-qxl && \
+	apt-get -y install spice-vdagent && \
+	apt-get -y install qemu-guest-agent
+
 
 # Install Xwindows files
 # ----------------------
