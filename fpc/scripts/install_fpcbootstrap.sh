@@ -5,7 +5,9 @@
 ################################################################################
 
 # download linux compiler
-wget --progress=dot:giga ftp://ftp.freepascal.org/fpc/dist/$FPCBootstrapVersion/x86_64-linux/fpc-$FPCBootstrapVersion-x86_64-linux.tar
+# wget --progress=dot:giga ftp://ftp.freepascal.org/fpc/dist/$FPCBootstrapVersion/x86_64-linux/fpc-$FPCBootstrapVersion-x86_64-linux.tar
+wget --progress=dot:giga https://sourceforge.net/projects/freepascal/files/Linux/$FPCBootstrapVersion/fpc-$FPCBootstrapVersion-x86_64-linux.tar
+
 # unpack only compiler
 tar -x fpc-$FPCBootstrapVersion-x86_64-linux/binary.x86_64-linux.tar -f ./fpc-$FPCBootstrapVersion-x86_64-linux.tar --strip-components 1
 tar -x base.x86_64-linux.tar.gz -f ./binary.x86_64-linux.tar
