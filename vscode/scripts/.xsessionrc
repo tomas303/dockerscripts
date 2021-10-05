@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z "$DockerXResolution" ]
+then
+	DockerXResolution="1920x1080"
+fi
+xrandr --output Virtual-1 --mode $DockerXResolution
+
+. /opt/scripts/launch_vscode.sh
