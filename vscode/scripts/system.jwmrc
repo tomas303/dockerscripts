@@ -3,7 +3,7 @@
 
     <!-- The root menu. -->
     <RootMenu onroot="12">
-        <Program label="VSCode">code</Program>
+        <Program label="VSCode">$ScriptsDir/launch_vscode.sh</Program>
         <Separator/>
         <Program icon="terminal.png" label="Terminal">xterm</Program>
         <Program icon="rxvt-unicode.png" label="rxvt-unicode">rxvt-unicode</Program>
