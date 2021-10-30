@@ -12,6 +12,15 @@ function lib_svncheckout () {
 	svn checkout --non-interactive --trust-server-cert $1 $2
 }
 
+# clone git repository
+# $1 - git repository
+# $2 - target directory(will be created)
+function lib_gitclone () {
+	mkdir -p $2
+	git clone $1 $2
+}
+
+
 # print variable's content for debug purpose
 # $1 - variable name(exclamation does the trick of indirect reference)
 function lib_printvar

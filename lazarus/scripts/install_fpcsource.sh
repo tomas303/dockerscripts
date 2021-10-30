@@ -6,4 +6,4 @@
 
 source $ScriptsDir/lib.sh
 
-lib_gitclone $LazarusUrl $LazarusSourceDir
+lib_gitclone $FPCUrl $FPCSourceDir
