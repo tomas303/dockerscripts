@@ -9,4 +9,6 @@
 /lib/systemd/systemd-udevd &
 udevadm trigger
 
+/etc/init.d/dbus start
+
 startx -- :$DockerXDisplay $DockerXTerminal

@@ -32,6 +32,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install xserver-xorg-core && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install xinit && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install x11-xserver-utils && \
     DEBIAN_FRONTEND=noninteractive apt-get -y install xorgxrdp && \
+    DEBIAN_FRONTEND=noninteractive apt-get -y install dbus && \
 	apt-get -y install jwm
 
 
