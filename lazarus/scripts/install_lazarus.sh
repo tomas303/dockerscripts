@@ -50,7 +50,7 @@ function Lin64
   export CPU_TARGET=x86_64
   export INSTALL_PREFIX=$LazarusTargetLinDir
   lib_make $LazarusSourceDir distclean
-  lib_make $LazarusSourceDir bigide
+  lib_make $LazarusSourceDir all
   lib_make $LazarusSourceDir install
 )
 
