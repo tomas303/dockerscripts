@@ -28,3 +28,12 @@ fi
 export USE_CCACHE=$EVDOCKER_USE_CCACHE
 export CCACHE_EXEC=/usr/bin/ccache
 ccache -M $EVDOCKER_CCACHE_SIZE
+
+# first droid run creates ccache as empty file(don't know why)
+# so this create it in advance
+if [ "$USE_CCACHE" == "1" ]; then
+  cachetmp="$HOME/.cache/ccache/tmp"
+  if [ ! -d "$cachetmp" ]; then
+    mkdir -p "$cachetmp"
+  fi
+fi

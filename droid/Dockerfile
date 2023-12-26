@@ -65,7 +65,12 @@ RUN apt-get -y install libxcomposite1 && \
     apt-get -y install libxcursor1 && \
     apt-get -y install libxdamage1 && \
     apt-get -y install libxi6 && \
-    apt-get -y install libxtst6
+    apt-get -y install libxtst6 && \
+    apt-get -y install libnss3
+
+# install packages for flash(lsusb)
+RUN apt-get -y install usbutils && \
+    apt-get -y install android-sdk-platform-tools-common
 
 
 # prepare rest
