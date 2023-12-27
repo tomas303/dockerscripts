@@ -37,3 +37,6 @@ if [ "$USE_CCACHE" == "1" ]; then
     mkdir -p "$cachetmp"
   fi
 fi
+
+export ALLOW_MISSING_DEPENDENCIES=true
+export WITH_GMS=true
