@@ -1,0 +1,13 @@
+#!/bin/bash
+
+PATH=/sbin:$PATH
+podman run --privileged \
+	-v /mnt/datashareone_nfs/sources:/sources \
+	-v /mnt/datashareone_nfs/sources/ideconfigs/fsharp:/vscode \
+        -e VSCodeUserDataDir=/vscode/userdatadir \
+	-e VSCodeExtensionsDir=/vscode/extensionsdir \
+	-p 5900:5900 \
+	-it \
+	--rm \
+	--name fsharp \
+	vscode  

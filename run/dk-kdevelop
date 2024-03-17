@@ -1,0 +1,12 @@
+#!/bin/bash
+
+docker run --privileged \
+        -v /mnt/datashareone_nfs/sources:/sources \
+	-v /mnt/datashareone_nfs/sources/ideconfigs/kdevelop:/root/.config \
+	-e KDevelopConfigDir=/kdevelopconfigdir \
+	-e DockerXDisplay=2 \
+        -e DockerXTerminal=vt9 \
+	--rm \
+	--name kdevelop \
+	-it \
+       	kdevelop #/bin/bash

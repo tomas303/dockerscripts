@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PATH=/sbin:$PATH
+podman run --privileged \
+	-v /mnt/datashareone_nfs/sources:/sources \
+	-p 5900:5900 \
+	-it \
+	--rm \
+	--name nvim \
+	nvim  

@@ -21,4 +21,5 @@ fi
 echo "vscode extensionsdir = $VSCodeExtensionsDir"
 
 # in case of problems use --verbose param
-code --no-sandbox --user-data-dir="$VSCodeUserDataDir" --extensions-dir="$VSCodeExtensionsDir" &
+# --disable-gpu probably prevent random freeze with text failed to connect to the bus
+code --disable-gpu --no-sandbox --user-data-dir="$VSCodeUserDataDir" --extensions-dir="$VSCodeExtensionsDir"

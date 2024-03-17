@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PATH=/sbin:$PATH
+podman run --privileged \
+	-v /mnt/datashareone/sources:/sources \
+	-v /mnt/datashareone/sources/ideconfigs/lazarus:/lazarusconfigdir \
+	-e LazarusConfigDir=/lazarusconfigdir \
+	-p 5900:5900 \
+	-it \
+	--rm \
+	--name lazarus_develop1 \
+	lazarus:develop1  

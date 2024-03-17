@@ -1,0 +1,10 @@
+#!/bin/bash
+
+podman run --privileged \
+        -v /mnt/datashareone_nfs/sources:/sources \
+	-e DockerXDisplay=3 \
+        -e DockerXTerminal=vt10 \
+	--rm \
+	--name xwin \
+	-it \
+        xwin 
