@@ -1,6 +1,6 @@
 # base image
 # ---------------
-FROM vscode 
+FROM debian:stable
 
 # Maintainer
 # ----------
@@ -17,14 +17,28 @@ COPY ./scripts/* $ScriptsDir/
 
 # Install software
 # --------------------
-RUN apt -y install tar
+RUN apt update && apt -y upgrade && \
+  apt -y install tar && \
+  apt -y install mc && \
+  apt -y install git && \
+  apt -y install wget && \
+  apt -y install gnupg && \
+  apt -y install build-essential
+
+# vscode
+RUN wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" \
+  -O /opt/vscode.deb --progress=dot:giga && \
+  apt -y install /opt/vscode.deb && \
+  rm /opt/vscode.deb && \
+  apt update
 
 # go 
-RUN wget https://dl.google.com/go/go1.22.1.linux-amd64.tar.gz \
+RUN wget "https://go.dev/dl/go1.23.4.linux-amd64.tar.gz" \
   -O /opt/go.tar.gz --progress=dot:giga && \
-	tar -C /usr/local -xzf /opt/go.tar.gz && \
-	rm /opt/go.tar.gz
+  tar -C /usr/local -xzf /opt/go.tar.gz && \
+  rm /opt/go.tar.gz
 
 # Add go to PATH
 ENV PATH="/usr/local/go/bin:${PATH}"
 
+RUN go install -v github.com/go-delve/delve/cmd/dlv@latest
