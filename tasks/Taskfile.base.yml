@@ -1,0 +1,78 @@
+version: '3'
+
+includes: {}
+
+tasks:
+
+  img-remove:
+    desc: "Remove a Podman image if it exists"
+    internal: true
+    cmds:
+      - |
+        IMAGE="{{.IMAGE_BASE}}:{{.IMAGE_TAG}}"
+        if podman image exists "$IMAGE"; then
+          echo "Removing image $IMAGE"
+          podman rmi "$IMAGE"
+        else
+          echo "Image $IMAGE does not exist"
+        fi
+
+  img-build:
+    desc: Build the image from Dockerfile
+    internal: true
+    cmds:
+      - podman build -f {{.DOCKER_FILE}} -t {{.IMAGE_BASE}}:{{.IMAGE_TAG}} {{.DOCKER_BUILD_DIR}}
+
+  img-retag:
+    desc: Tag image with version
+    internal: true
+    cmds:
+      - podman tag {{.IMAGE_BASE}}:{{.IMAGE_TAG}} {{.IMAGE_BASE}}:{{.IMAGE_NEW_TAG}}
+
+  img-pull:
+    desc: Pull remote image
+    internal: true
+    cmds:
+      - podman pull {{.BASE_REMOTE_IMAGE}}
+
+  dbc-remove:
+    desc: Remove existing Distrobox container
+    internal: true
+    ignore_error: true
+    cmds:
+      - distrobox rm {{.DBC_NAME}}
+
+  dbc-create:
+    desc: Create a new Distrobox container
+    internal: true
+    cmds:
+      - distrobox create --name {{.DBC_NAME}} --home {{.DBC_HOME}} --image {{.IMAGE_BASE}}:{{.IMAGE_TAG}}
+
+  dbc-exec-cmd:
+    desc: Executes command inside Distrobox container
+    internal: true
+    cmds:
+      - distrobox enter --name {{.DBC_NAME}} -- bash -c "{{.DBC_COMMAND}}"
+
+  dbc-stop:
+    desc: Stop Distrobox container
+    internal: true
+    ignore_error: true
+    cmds:
+      - distrobox stop {{.DBC_NAME}}
+
+  rebuild:
+    desc: "Full cycle"
+    internal: true
+    deps: [remove-image, build-image, remove-dbc, create-dbc]
+
+  full-rebuild:
+    desc: Rebuild Distrobox container
+    internal: true
+    cmds:
+      - task: dbc-stop
+      - task: dbc-remove
+      - task: img-remove
+      - task: img-build
+      - task: dbc-create
+      - task: dbc-exec-cmd

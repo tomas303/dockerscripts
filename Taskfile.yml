@@ -1,0 +1,16 @@
+version: "3"
+
+includes:
+  go-test: ./go/Taskfile.test.yml
+
+tasks:
+  # Meta-task to build all containers
+  build-all:
+    desc: Build all dev environment containers
+    cmds:
+      - task: go:build
+
+  list:
+    desc: List all available tasks
+    cmds:
+      - task --list
