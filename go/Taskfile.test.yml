@@ -3,11 +3,10 @@ version: '3'
 includes:
   def:
     taskfile: ./Taskfile.def.yml
-    dir: .
     optional: false
   base:
     taskfile: ../tasks/Taskfile.base.yml
-    dir: .
+    dir: ..
     optional: false
 
 vars:

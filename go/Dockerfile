@@ -8,11 +8,12 @@ LABEL org.opencontainers.image.authors="tomashorak@post.cz"
 
 # Environment variables
 # -------------------------------------------------------------
-ENV ScriptsDir=/opt/scripts 
+ENV ScriptsDir=/opt/scripts
+RUN mkdir -p ${ScriptsDir}
 
 # Install scripts
 # --------------------
-COPY ./setup.sh $ScriptsDir/
+COPY ./lib/funcs.sh ./go/setup.sh ${ScriptsDir}/
 
 
 # Install software

@@ -1,7 +1,9 @@
 version: "3"
 
 includes:
-  go-test: ./go/Taskfile.test.yml
+  go-test:
+    taskfile: go/Taskfile.test.yml
+    dir: .
 
 tasks:
   # Meta-task to build all containers
