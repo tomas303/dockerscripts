@@ -9,6 +9,7 @@ LABEL org.opencontainers.image.authors="tomashorak@post.cz"
 # Environment variables
 # -------------------------------------------------------------
 ENV ScriptsDir=/opt/scripts
+
 RUN mkdir -p ${ScriptsDir}
 
 # Install scripts
@@ -43,4 +44,3 @@ RUN wget "https://go.dev/dl/go1.24.2.linux-amd64.tar.gz" \
 # Add go to PATH
 ENV PATH="/usr/local/go/bin:${PATH}"
 
-RUN go install -v github.com/go-delve/delve/cmd/dlv@latest

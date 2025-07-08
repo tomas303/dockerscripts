@@ -16,3 +16,4 @@ install_extension "GitHub.copilot-chat"
 install_extension "alefragnani.numbered-bookmarks"
 install_extension "qwtel.sqlite-viewer"
 
+go install -v github.com/go-delve/delve/cmd/dlv@latest
