@@ -23,11 +23,11 @@ tasks:
     cmds:
       - podman build -f {{.DOCKER_FILE}} -t {{.IMAGE_BASE}}:{{.IMAGE_TAG}} {{.DOCKER_BUILD_DIR}}
 
-  img-retag:
+  img-cptag:
     desc: Tag image with version
     internal: true
     cmds:
-      - podman tag {{.IMAGE_BASE}}:{{.IMAGE_TAG}} {{.IMAGE_BASE}}:{{.IMAGE_NEW_TAG}}
+      - podman tag {{.IMAGE_BASE}}:{{.IMAGE_FROM_TAG}} {{.IMAGE_BASE}}:{{.IMAGE_TAG}}
 
   img-pull:
     desc: Pull remote image
@@ -74,5 +74,19 @@ tasks:
       - task: dbc-remove
       - task: img-remove
       - task: img-build
+      - task: dbc-create
+      - task: dbc-exec-cmd
+
+  dbc-drop:
+    desc: Drop distrobox container
+    internal: true
+    cmds:
+      - task: dbc-stop
+      - task: dbc-remove
+
+  dbc-new:
+    desc: Drop distrobox container
+    internal: true
+    cmds:
       - task: dbc-create
       - task: dbc-exec-cmd

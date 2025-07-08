@@ -4,6 +4,9 @@ includes:
   go-test:
     taskfile: go/Taskfile.test.yml
     dir: .
+  go-devel:
+    taskfile: go/Taskfile.devel.yml
+    dir: .
 
 tasks:
   # Meta-task to build all containers
