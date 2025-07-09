@@ -7,6 +7,12 @@ includes:
   go-devel:
     taskfile: go/Taskfile.devel.yml
     dir: .
+  vscodeext-test:
+    taskfile: vscodeext/Taskfile.test.yml
+    dir: .
+  vscodeext-devel:
+    taskfile: vscodeext/Taskfile.devel.yml
+    dir: .
 
 tasks:
   # Meta-task to build all containers
