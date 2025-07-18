@@ -31,6 +31,3 @@ RUN bash ${ScriptsDir}/debian_go.sh
 RUN apt -y install default-jre && \
   apt -y install build-essential
 
-# Add go to PATH
-ENV PATH="/usr/local/go/bin:${PATH}"
-
