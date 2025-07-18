@@ -10,33 +10,23 @@ LABEL org.opencontainers.image.authors="tomashorak@post.cz"
 # -------------------------------------------------------------
 ENV ScriptsDir=/opt/scripts 
 
+RUN mkdir -p ${ScriptsDir}
+
 # Install scripts
 # --------------------
-COPY ./scripts/* $ScriptsDir/
+COPY \ 
+  ./lib/funcs.sh \
+  ./lib/debian_base_install.sh \
+  ./lib/debian_dotnet_sdk.sh \
+  ./lib/debian_vscode.sh \
+  ./lib/setup_default.sh \
+  ./fsharp/setup.sh \
+  ${ScriptsDir}/
 
-# Install software
-# --------------------
-RUN apt update && apt -y upgrade && \
-  apt -y install mc && \ 
-  apt -y install git && \
-  apt -y install wget && \
-  apt -y install gnupg && \
-  apt -y install nodejs && \
-  apt -y install npm
-# .net sdk
-RUN DEBIAN_VERSION=$(awk -F'.' '{print $1}' /etc/debian_version) && \
-    wget "https://packages.microsoft.com/config/debian/$DEBIAN_VERSION/packages-microsoft-prod.deb" \
-    -O /opt/packages-microsoft-prod.deb --progress=dot:giga && \
-    apt -y install /opt/packages-microsoft-prod.deb && \
-    rm /opt/packages-microsoft-prod.deb && \
-    apt update && \
-    apt install -y apt-transport-https && \
-    apt install -y dotnet-sdk-8.0 && \
-    apt install -y powershell && \
-    dotnet workload update
-# vscode
-RUN wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" \
-  -O /opt/vscode.deb --progress=dot:giga && \
-	apt -y install /opt/vscode.deb && \
-	rm /opt/vscode.deb && \
-	apt update
+RUN bash ${ScriptsDir}/debian_base_install.sh
+RUN bash ${ScriptsDir}/debian_dotnet_sdk.sh
+RUN bash ${ScriptsDir}/debian_vscode.sh
+
+RUN apt -y install nodejs && \
+  apt -y install npm 
+

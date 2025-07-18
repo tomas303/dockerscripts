@@ -13,6 +13,12 @@ includes:
   vscodeext-devel:
     taskfile: vscodeext/Taskfile.devel.yml
     dir: .
+  fsharp-test:
+    taskfile: fsharp/Taskfile.test.yml
+    dir: .
+  fsharp-devel:
+    taskfile: fsharp/Taskfile.devel.yml
+    dir: .
 
 tasks:
   # Meta-task to build all containers
@@ -20,6 +26,8 @@ tasks:
     desc: Build all dev environment containers
     cmds:
       - task: go:build
+      - task: vscodeext:build
+      - task: fsharp:build
 
   list:
     desc: List all available tasks

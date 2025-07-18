@@ -14,32 +14,22 @@ RUN mkdir -p ${ScriptsDir}
 
 # Install scripts
 # --------------------
-COPY ./lib/funcs.sh ./go/setup.sh ${ScriptsDir}/
+COPY \ 
+  ./lib/funcs.sh \
+  ./lib/debian_base_install.sh \
+  ./lib/debian_vscode.sh \
+  ./lib/debian_go.sh \
+  ./lib/setup_default.sh \
+  ./go/setup.sh \
+  ${ScriptsDir}/
+
+RUN bash ${ScriptsDir}/debian_base_install.sh
+RUN bash ${ScriptsDir}/debian_vscode.sh
+RUN bash ${ScriptsDir}/debian_go.sh
 
 
-# Install software
-# --------------------
-RUN apt update && apt -y upgrade && \
-  apt -y install tar && \
-  apt -y install mc && \
-  apt -y install git && \
-  apt -y install wget && \
-  apt -y install gnupg && \
-  apt -y install default-jre && \
+RUN apt -y install default-jre && \
   apt -y install build-essential
-
-# vscode
-RUN wget "https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64" \
-  -O /opt/vscode.deb --progress=dot:giga && \
-  apt -y install /opt/vscode.deb && \
-  rm /opt/vscode.deb && \
-  apt update
-
-# go
-RUN wget "https://go.dev/dl/go1.24.2.linux-amd64.tar.gz" \
-  -O /opt/go.tar.gz --progress=dot:giga && \
-  tar -C /usr/local -xzf /opt/go.tar.gz && \
-  rm /opt/go.tar.gz
 
 # Add go to PATH
 ENV PATH="/usr/local/go/bin:${PATH}"
