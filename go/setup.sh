@@ -18,6 +18,11 @@ install_extension "qwtel.sqlite-viewer"
 
 go install -v github.com/go-delve/delve/cmd/dlv@latest
 
-echo PATH="/usr/local/go/bin:$PATH" >> ~/.profile
+if ! grep "/usr/local/go/bin:" ~/.profile; then
+  echo >> ~/.profile 
+  echo "# add go path" >> ~/.profile
+  echo PATH="/usr/local/go/bin:$PATH" >> ~/.profile
+fi
+
 
 
