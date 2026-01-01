@@ -1,0 +1,17 @@
+version: '3'
+
+# obejit se bez CNT_SUFFIX
+# nebo lepe receno ho pustit s jinou hodnotou
+# anebo to mit napevno jako testing ...  apridat ulohu ktera z toho udela non testing
+# if ok. 
+#  but maybe good accept parameter becuase if onto satisfied then can be created by hand.
+
+vars:
+  CNT_NAME: "nvim"
+  CNT_BOOTSTRAP: "/usr/local/bin/bootstrap-nvim.sh"
+  CNT_APP: "nvim"
+
+includes:
+  actions:
+    taskfile: ../tasks/Actions.yml
+    flatten: true
