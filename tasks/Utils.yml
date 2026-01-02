@@ -1,15 +1,5 @@
 version: '3'
 
-# vars:
-#   CNT_SUFFIX: "devel"
-#   DOCKER_FILE: "./nvimkickstart/Dockerfile"
-#   DOCKER_BUILD_DIR: "."
-#   IMAGE_BASE: "{{.CNT_BASE}}"
-#   IMAGE_TAG: "{{.CNT_SUFFIX}}"
-#   DBC_NAME: "{{.CNT_BASE}}{{.CNT_SUFFIX}}"
-#   DBC_HOME: "/home/tomas/homes/{{.CNT_BASE}}{{.CNT_SUFFIX}}"
-#   DBC_COMMAND: "/opt/scripts/setup.sh && distrobox-export --app {{.CNT_APP}}"
-
 tasks:
 
   img-remove:

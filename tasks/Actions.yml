@@ -7,27 +7,28 @@ includes:
     flatten: true
 
 vars:
-  FUTURE: "future"
-  PRESENT: "present"
+  # template just pospones it to run phase
+  SUFFIX: '{{.SUFFIX | default "testing"}}'
+  STABLE: 'stable'
 
-  ACTION_PARAMS_FUTURE:
+  ACTION_PARAMS_SUFFIX:
       map:
         DOCKER_FILE: "{{.USER_WORKING_DIR}}/Dockerfile"
         DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}"
         IMAGE_BASE: "{{.CNT_NAME}}"
-        IMAGE_TAG: "{{.FUTURE}}"
-        DBC_NAME: "{{.CNT_NAME}}_{{.FUTURE}}"
-        DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}_{{.FUTURE}}"
+        IMAGE_TAG: "{{.SUFFIX}}"
+        DBC_NAME: "{{.CNT_NAME}}{{.SUFFIX}}"
+        DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}{{.SUFFIX}}"
         DBC_COMMAND: "{{.CNT_BOOTSTRAP}} && distrobox-export --app {{.CNT_APP}}"
-    
-  ACTION_PARAMS_PRESENT:
+
+  ACTION_PARAMS_STABLE:
       map:
         DOCKER_FILE: "{{.USER_WORKING_DIR}}/Dockerfile"
         DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}"
         IMAGE_BASE: "{{.CNT_NAME}}"
-        IMAGE_TAG: "{{.PRESENT}}"
-        DBC_NAME: "{{.CNT_NAME}}_{{.PRESENT}}"
-        DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}_{{.PRESENT}}"
+        IMAGE_TAG: "{{.STABLE}}"
+        DBC_NAME: "{{.CNT_NAME}}{{.STABLE}}"
+        DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}{{.STABLE}}"
         DBC_COMMAND: "{{.CNT_BOOTSTRAP}} && distrobox-export --app {{.CNT_APP}}"
 
 tasks:
@@ -41,13 +42,14 @@ tasks:
     desc: show vars definitions
     cmds:
       - |
-        echo "Future:"
-        {{- range $key, $value := .ACTION_PARAMS_FUTURE }}
+        echo ""
+        echo "Action params suffix:"
+        {{- range $key, $value := .ACTION_PARAMS_SUFFIX }}
         echo "{{ $key }}: {{ $value }}"
         {{- end }}
         echo ""
-        echo "Present:"
-        {{- range $key, $value := .ACTION_PARAMS_PRESENT }}
+        echo "Action params stable:"
+        {{- range $key, $value := .ACTION_PARAMS_STABLE }}
         echo "{{ $key }}: {{ $value }}"
         {{- end }}
         
@@ -57,15 +59,15 @@ tasks:
     cmds:
       - task: img-remove
         vars:
-          IMAGE_BASE: '{{get .ACTION_PARAMS_FUTURE "IMAGE_BASE"}}'
-          IMAGE_TAG: '{{get .ACTION_PARAMS_FUTURE "IMAGE_TAG"}}'
+          IMAGE_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
 
       - task: img-build
         vars:
-          IMAGE_BASE: '{{get .ACTION_PARAMS_FUTURE "IMAGE_BASE"}}'
-          IMAGE_TAG: '{{get .ACTION_PARAMS_FUTURE "IMAGE_TAG"}}'
-          DOCKER_FILE: '{{get .ACTION_PARAMS_FUTURE "DOCKER_FILE"}}'
-          DOCKER_BUILD_DIR: '{{get .ACTION_PARAMS_FUTURE "DOCKER_BUILD_DIR"}}'
+          IMAGE_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
+          DOCKER_FILE: '{{get .ACTION_PARAMS_SUFFIX "DOCKER_FILE"}}'
+          DOCKER_BUILD_DIR: '{{get .ACTION_PARAMS_SUFFIX "DOCKER_BUILD_DIR"}}'
 
 
   remove:dbc:
@@ -73,11 +75,11 @@ tasks:
     cmds:
       - task: dbc-stop
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_FUTURE "DBC_NAME"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_SUFFIX "DBC_NAME"}}'
 
       - task: dbc-remove
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_FUTURE "DBC_NAME"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_SUFFIX "DBC_NAME"}}'
 
 
   create:dbc:
@@ -85,15 +87,24 @@ tasks:
     cmds:
       - task: dbc-create
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_FUTURE "DBC_NAME"}}'
-          DBC_HOME: '{{get .ACTION_PARAMS_FUTURE "DBC_HOME"}}'
-          IMAGE_BASE: '{{get .ACTION_PARAMS_FUTURE "IMAGE_BASE"}}'
-          IMAGE_TAG: '{{get .ACTION_PARAMS_FUTURE "IMAGE_TAG"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_SUFFIX "DBC_NAME"}}'
+          DBC_HOME: '{{get .ACTION_PARAMS_SUFFIX "DBC_HOME"}}'
+          IMAGE_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
 
       - task: dbc-exec-cmd
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_FUTURE "DBC_NAME"}}'
-          DBC_COMMAND: '{{get .ACTION_PARAMS_FUTURE "DBC_COMMAND"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_SUFFIX "DBC_NAME"}}'
+          DBC_COMMAND: '{{get .ACTION_PARAMS_SUFFIX "DBC_COMMAND"}}'
+
+
+  remove:img:
+    desc: Remove img if exists
+    cmds:
+      - task: img-remove
+        vars:
+          IMAGE_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
 
 
   rebuild:dbc:
@@ -111,33 +122,33 @@ tasks:
       - task: create:dbc
 
 
-  rebuild:present:from:future:
-    desc: Make present version from future version
+  copy:to:stable:
+    desc: Make stable version(without SUFFIX) from suffix version
     cmds:
       - task: dbc-stop
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_PRESENT "DBC_NAME"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_STABLE "DBC_NAME"}}'
 
       - task: dbc-remove
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_PRESENT "DBC_NAME"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_STABLE "DBC_NAME"}}'
 
       - task: img-cptag
         vars:
-          IMAGE_FROM_BASE: '{{get .ACTION_PARAMS_FUTURE "IMAGE_BASE"}}'
-          IMAGE_FROM_TAG: '{{get .ACTION_PARAMS_FUTURE "IMAGE_TAG"}}'
-          IMAGE_BASE: '{{get .ACTION_PARAMS_PRESENT "IMAGE_BASE"}}'
-          IMAGE_TAG: '{{get .ACTION_PARAMS_PRESENT "IMAGE_TAG"}}'
+          IMAGE_FROM_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
+          IMAGE_FROM_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
+          IMAGE_BASE: '{{get .ACTION_PARAMS_STABLE "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_STABLE "IMAGE_TAG"}}'
 
       - task: dbc-create
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_PRESENT "DBC_NAME"}}'
-          DBC_HOME: '{{get .ACTION_PARAMS_PRESENT "DBC_HOME"}}'
-          IMAGE_BASE: '{{get .ACTION_PARAMS_PRESENT "IMAGE_BASE"}}'
-          IMAGE_TAG: '{{get .ACTION_PARAMS_PRESENT "IMAGE_TAG"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_STABLE "DBC_NAME"}}'
+          DBC_HOME: '{{get .ACTION_PARAMS_STABLE "DBC_HOME"}}'
+          IMAGE_BASE: '{{get .ACTION_PARAMS_STABLE "IMAGE_BASE"}}'
+          IMAGE_TAG: '{{get .ACTION_PARAMS_STABLE "IMAGE_TAG"}}'
 
       - task: dbc-exec-cmd
         vars:
-          DBC_NAME: '{{get .ACTION_PARAMS_PRESENT "DBC_NAME"}}'
-          DBC_COMMAND: '{{get .ACTION_PARAMS_PRESENT "DBC_COMMAND"}}'
+          DBC_NAME: '{{get .ACTION_PARAMS_STABLE "DBC_NAME"}}'
+          DBC_COMMAND: '{{get .ACTION_PARAMS_STABLE "DBC_COMMAND"}}'
   
