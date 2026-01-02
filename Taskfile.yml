@@ -19,6 +19,12 @@ includes:
   fsharp-devel:
     taskfile: fsharp/Taskfile.devel.yml
     dir: .
+  asvim-test:
+    taskfile: asvim/Taskfile.test.yml
+    dir: .
+  asvim-devel:
+    taskfile: asvim/Taskfile.devel.yml
+    dir: .
 
 tasks:
   # Meta-task to build all containers

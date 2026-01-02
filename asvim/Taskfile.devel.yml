@@ -1,0 +1,30 @@
+version: '3'
+
+includes:
+  def:
+    taskfile: ./Taskfile.def.yml
+    optional: false
+  base:
+    taskfile: ../tasks/Taskfile.base.yml
+    dir: ..
+    optional: false
+
+vars:
+  CNT_BASE: "asvim"
+  CNT_SUFFIX: "devel"
+  CNT_APP: "asvim"
+
+tasks:
+  rebuild:
+    desc: Rebuild new astronvim distrobox container
+    cmds:
+      - task: base:full-rebuild
+
+  rebuild-fromtest:
+    desc: Rebuild new astronvim distrobox container from test
+    cmds:
+      - task: base:dbc-drop
+      - task: base:img-cptag
+        vars:
+          IMAGE_FROM_TAG: "test"
+      - task: base:dbc-new
