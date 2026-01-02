@@ -14,7 +14,7 @@ vars:
   ACTION_PARAMS_SUFFIX:
       map:
         DOCKER_FILE: "{{.USER_WORKING_DIR}}/Dockerfile"
-        DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}"
+        DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}/.."
         IMAGE_BASE: "{{.CNT_NAME}}"
         IMAGE_TAG: "{{.SUFFIX}}"
         DBC_NAME: "{{.CNT_NAME}}{{.SUFFIX}}"
@@ -24,7 +24,7 @@ vars:
   ACTION_PARAMS_STABLE:
       map:
         DOCKER_FILE: "{{.USER_WORKING_DIR}}/Dockerfile"
-        DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}"
+        DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}/.."
         IMAGE_BASE: "{{.CNT_NAME}}"
         IMAGE_TAG: "{{.STABLE}}"
         DBC_NAME: "{{.CNT_NAME}}{{.STABLE}}"

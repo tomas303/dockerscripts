@@ -44,5 +44,5 @@ RUN curl -L \
 # WORKDIR $HOME
 
 # Bootstrap script (acts only on $HOME)
-COPY bootstrap-nvim.sh /usr/local/bin/bootstrap-nvim.sh
-COPY nvim.desktop /opt/nvim.desktop
+COPY ./nvimkickstart/bootstrap-nvim.sh /usr/local/bin/bootstrap-nvim.sh
+COPY ./nvimkickstart/nvim.desktop /opt/nvim.desktop

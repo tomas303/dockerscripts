@@ -9,6 +9,6 @@ wget "https://packages.microsoft.com/config/debian/$DEBIAN_VERSION/packages-micr
     apt update && \
     apt install -y apt-transport-https && \
     apt install -y dotnet-sdk-8.0 && \
-    apt install -y powershell && \
+    # apt install -y powershell && \
     dotnet workload update
 

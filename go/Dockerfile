@@ -1,6 +1,6 @@
-# base image
 # ---------------
 FROM debian:stable
+# base image
 
 # Maintainer
 # ----------
