@@ -1,0 +1,11 @@
+version: '3'
+
+vars:
+  CNT_NAME: "go"
+  CNT_BOOTSTRAP: "/opt/scripts/setup.sh"
+  CNT_APP: "code"
+
+includes:
+  actions:
+    taskfile: ../tasks/Actions.yml
+    flatten: true
