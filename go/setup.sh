@@ -21,8 +21,5 @@ install_extension "qwtel.sqlite-viewer"
 if ! grep "/usr/local/go/bin:" ~/.profile; then
   echo >> ~/.profile 
   echo "# add go path" >> ~/.profile
-  echo PATH="/usr/local/go/bin:$PATH" >> ~/.profile
+  echo 'PATH="/usr/local/go/bin:$PATH"' >> ~/.profile
 fi
-
-
-
