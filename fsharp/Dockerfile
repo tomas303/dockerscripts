@@ -18,12 +18,14 @@ COPY \
   ./lib/funcs.sh \
   ./lib/debian_base_install.sh \
   ./lib/debian_dotnet_sdk.sh \
+  ./lib/debian_task.sh \
   ./lib/debian_vscode.sh \
   ./lib/setup_default.sh \
   ./fsharp/setup.sh \
   ${ScriptsDir}/
 
 RUN bash ${ScriptsDir}/debian_base_install.sh
+RUN bash ${ScriptsDir}/debian_task.sh
 RUN bash ${ScriptsDir}/debian_dotnet_sdk.sh
 RUN bash ${ScriptsDir}/debian_vscode.sh
 

@@ -17,6 +17,7 @@ RUN mkdir -p ${ScriptsDir}
 COPY \ 
   ./lib/funcs.sh \
   ./lib/debian_base_install.sh \
+  ./lib/debian_task.sh \
   ./lib/debian_vscode.sh \
   ./lib/debian_go.sh \
   ./lib/setup_default.sh \
@@ -24,6 +25,7 @@ COPY \
   ${ScriptsDir}/
 
 RUN bash ${ScriptsDir}/debian_base_install.sh
+RUN bash ${ScriptsDir}/debian_task.sh
 RUN bash ${ScriptsDir}/debian_vscode.sh
 RUN bash ${ScriptsDir}/debian_go.sh
 

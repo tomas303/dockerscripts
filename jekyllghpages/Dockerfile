@@ -12,7 +12,7 @@ ENV BUNDLE_GEMFILE=/opt/Gemfile
 
 # Install scripts
 # --------------------
-COPY Gemfile /opt
+COPY jekyllghpages/Gemfile /opt
 
 # install dependecies
 RUN bundle update
