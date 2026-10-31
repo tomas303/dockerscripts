@@ -36,11 +36,11 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install gnupg && \
     apt-get -y install gperf && \
     apt-get -y install imagemagick && \
-    apt-get -y install lib32ncurses5-dev && \
+    apt-get -y install lib32ncurses-dev && \
     apt-get -y install lib32readline-dev && \
     apt-get -y install lib32z1-dev && \
     apt-get -y install libelf-dev && \
-    apt-get -y install liblz4-tool && \
+    apt-get -y install lz4 && \
     apt-get -y install libsdl1.2-dev && \
     apt-get -y install libssl-dev && \
     apt-get -y install libxml2 && \
@@ -51,10 +51,10 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install schedtool && \
     apt-get -y install squashfs-tools && \
     apt-get -y install xsltproc && \
+    apt-get -y install unzip && \
     apt-get -y install zip && \
     apt-get -y install zlib1g-dev && \
-    apt-get -y install libncurses5 && \
-    apt-get -y install libncurses5-dev && \
+    apt-get -y install libncurses-dev && \
     apt-get -y install python3 && \
     apt-get -y install python-is-python3 && \
     apt-get -y install mc && \
