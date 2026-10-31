@@ -1,0 +1,44 @@
+version: '3'
+
+vars:
+  DOCKER_FILE: "{{.USER_WORKING_DIR}}/Dockerfile"
+  DOCKER_BUILD_DIR: "{{.USER_WORKING_DIR}}/.."
+  IMAGE_BASE: "jekyllghpages"
+  IMAGE_TAG: "latest"
+
+includes:
+  utils:
+    taskfile: ../tasks/Utils.yml
+    flatten: true
+
+
+tasks:
+  default:
+    desc: list tasks
+    cmds:
+      - task --list
+
+
+  build:
+    desc: build docker image
+    cmds:
+      - task: img-remove
+      - task: img-build
+
+  launch:
+    desc: launch docker image
+    env:
+        JEKYLL_VERSION: latest
+        JEKYLL_TOMAS303: /home/tomas/development/tomas303/tomas303.github.io
+    cmds:
+      - |
+        podman run --rm \
+        --name jekyllserve  \
+        -it \
+        -e JEKYLL_ROOTLESS=1 \
+        -p 4000:4000 \
+        -v "$JEKYLL_TOMAS303:/srv/jekyll:Z" \
+        {{.IMAGE_BASE}}:{{.IMAGE_TAG}} \
+        jekyll serve --trace --watch --drafts --force_polling
+
+
