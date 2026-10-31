@@ -13,13 +13,13 @@ ENV EVDOCKER_SCRIPTSDIR=/opt/scripts \
     EVDOCKER_SDKPLATFORMTOOLS=/opt/android/sdk/platform-tools \
     EVDOCKER_GITEMAIL="tomashorak@post.cz" \
     EVDOCKER_GITUSER="tomash" \
-    EVDOCKER_LINEAGEDIR="$HOME/android/lineage" \
     EVDOCKER_USE_CCACHE=1 \
     EVDOCKER_CCACHE_SIZE=100G
 
 # Install scripts
 # --------------------
 COPY ./scripts/*.sh $EVDOCKER_SCRIPTSDIR/
+RUN chmod a+x $EVDOCKER_SCRIPTSDIR/*.sh
 
 # install tools for build android
 RUN apt-get update && apt-get -y upgrade && \
@@ -76,5 +76,6 @@ RUN apt-get -y install usbutils && \
 # prepare rest
 RUN $EVDOCKER_SCRIPTSDIR/installrest.sh
 
-CMD $EVDOCKER_SCRIPTSDIR/launch.sh
+# login shell sources /etc/profile.d/droidenv.sh (environment setup)
+CMD ["/bin/bash", "-l"]
 
