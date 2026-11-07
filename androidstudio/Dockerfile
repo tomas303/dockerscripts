@@ -21,6 +21,7 @@ COPY \
   ./lib/funcs.sh \
   ./lib/debian_base_install.sh \
   ./lib/debian_task.sh \
+  ./lib/setup_default.sh \
   ./androidstudio/setup.sh \
   ${ScriptsDir}/
 
