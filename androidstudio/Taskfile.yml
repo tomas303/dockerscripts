@@ -1,0 +1,11 @@
+version: '3'
+
+vars:
+  CNT_NAME: "androidstudio"
+  CNT_BOOTSTRAP: "/opt/scripts/setup.sh"
+  CNT_APP: "android-studio"
+
+includes:
+  actions:
+    taskfile: ../tasks/Actions.yml
+    flatten: true
