@@ -60,6 +60,13 @@ RUN apt-get update && apt-get -y upgrade && \
     apt-get -y install mc && \
     apt-get -y install vim
 
+# libncurses5/libtinfo5 needed by old prebuilt AOSP clang (removed from current Debian, taken from bookworm pool)
+RUN cd /tmp && \
+    curl -fsSLO https://deb.debian.org/debian/pool/main/n/ncurses/libtinfo5_6.4-4_amd64.deb && \
+    curl -fsSLO https://deb.debian.org/debian/pool/main/n/ncurses/libncurses5_6.4-4_amd64.deb && \
+    apt-get -y install ./libtinfo5_6.4-4_amd64.deb ./libncurses5_6.4-4_amd64.deb && \
+    rm -f /tmp/*.deb
+
 # install packages for run emulator
 RUN apt-get -y install libxcomposite1 && \
     apt-get -y install libxcursor1 && \
