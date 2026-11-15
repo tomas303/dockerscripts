@@ -64,3 +64,15 @@ function set_git_identity()
     git config --global user.email "$email"
   fi
 }
+
+################################################################################
+# set_git_fsync
+# make git fsync all repository data (protects against corruption when the
+# system freezes, e.g. when running from external ssd)
+################################################################################
+
+function set_git_fsync()
+{
+  git config --global core.fsync all
+  git config --global core.fsyncMethod fsync
+}

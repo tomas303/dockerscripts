@@ -63,13 +63,24 @@ RUN wget "${ANDROID_STUDIO_URL}" -O /opt/android-studio.tar.gz --progress=dot:gi
   tar -xzf /opt/android-studio.tar.gz -C /opt && \
   rm /opt/android-studio.tar.gz
 
+# Default Android SDK, downloaded by setup.sh into ~/Android/Sdk on first run
+# (check https://developer.android.com/studio#command-line-tools-only for newer cmdline-tools)
+ENV ANDROID_CMDLINE_TOOLS_URL=https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
+ENV ANDROID_SDK_PACKAGES="platform-tools platforms;android-36 build-tools;36.0.0"
+
+# skip the first-run Setup Wizard (standard/custom)
+RUN echo 'disable.android.first.run=true' >> /opt/android-studio/bin/idea.properties
+
 # desktop entry, so distrobox-export --app android-studio works
+# (login shell, so ~/.profile with ANDROID_HOME is read and Studio finds the SDK;
+#  cd ~ because launchers like rofi may start it in a cwd that exists only in the
+#  container, which makes distrobox-host-exec (xdg-open -> browser) fail with 127)
 RUN printf '%s\n' \
   '[Desktop Entry]' \
   'Version=1.0' \
   'Type=Application' \
   'Name=Android Studio' \
-  'Exec=/opt/android-studio/bin/studio.sh %f' \
+  'Exec=bash -lc "cd ~ && /opt/android-studio/bin/studio.sh %f"' \
   'Icon=/opt/android-studio/bin/studio.png' \
   'Categories=Development;IDE;' \
   'Terminal=false' \
