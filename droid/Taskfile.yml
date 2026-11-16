@@ -1,0 +1,14 @@
+version: '3'
+
+vars:
+  CNT_NAME: "droid"
+  # no first-run setup and no exported app
+  CNT_BOOTSTRAP: "true"
+  CNT_APP: ""
+  # KVM for emulator; if needed (backend-dependent) add: --group-add render --group-add video
+  CNT_FLAGS: "--device /dev/kvm --device /dev/dri"
+
+includes:
+  actions:
+    taskfile: ../tasks/Actions.yml
+    flatten: true

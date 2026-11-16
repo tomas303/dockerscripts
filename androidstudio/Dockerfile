@@ -47,6 +47,34 @@ RUN apt-get update && \
     libxcursor1 \
     libxdamage1 \
     libxkbcommon-x11-0 \
+    libxkbfile1 \
+    libsm6 \
+    libice6 \
+    libpng16-16 \
+    libexpat1 \
+    libxfixes3 \
+    libx11-xcb1 \
+    libxcb-cursor0 \
+    libxcb-icccm4 \
+    libxcb-image0 \
+    libxcb-keysyms1 \
+    libxcb-randr0 \
+    libxcb-render0 \
+    libxcb-render-util0 \
+    libxcb-shape0 \
+    libxcb-shm0 \
+    libxcb-sync1 \
+    libxcb-util1 \
+    libxcb-xfixes0 \
+    libxcb-xinerama0 \
+    libxcb-xinput0 \
+    libxcb-xkb1 \
+    libxcb-glx0 \
+    libxcb-dri3-0 \
+    libxcb-present0 \
+    libxshmfence1 \
+    libegl1 \
+    libglu1-mesa \
     libgbm1 \
     libgl1 \
     libnss3 \

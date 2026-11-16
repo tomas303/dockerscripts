@@ -19,7 +19,8 @@ vars:
         IMAGE_TAG: "{{.SUFFIX}}"
         DBC_NAME: "{{.CNT_NAME}}{{.SUFFIX}}"
         DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}{{.SUFFIX}}"
-        DBC_COMMAND: "{{.CNT_BOOTSTRAP}} && distrobox-export --app {{.CNT_APP}}"
+        DBC_FLAGS: "{{.CNT_FLAGS}}"
+        DBC_COMMAND: "{{.CNT_BOOTSTRAP}}{{if .CNT_APP}} && distrobox-export --app {{.CNT_APP}}{{end}}"
 
   ACTION_PARAMS_STABLE:
       map:
@@ -29,7 +30,8 @@ vars:
         IMAGE_TAG: "{{.STABLE}}"
         DBC_NAME: "{{.CNT_NAME}}{{.STABLE}}"
         DBC_HOME: "/home/tomas/homes/{{.CNT_NAME}}{{.STABLE}}"
-        DBC_COMMAND: "{{.CNT_BOOTSTRAP}} && distrobox-export --app {{.CNT_APP}}"
+        DBC_FLAGS: "{{.CNT_FLAGS}}"
+        DBC_COMMAND: "{{.CNT_BOOTSTRAP}}{{if .CNT_APP}} && distrobox-export --app {{.CNT_APP}}{{end}}"
 
 tasks:
   default:
@@ -89,6 +91,7 @@ tasks:
         vars:
           DBC_NAME: '{{get .ACTION_PARAMS_SUFFIX "DBC_NAME"}}'
           DBC_HOME: '{{get .ACTION_PARAMS_SUFFIX "DBC_HOME"}}'
+          DBC_FLAGS: '{{get .ACTION_PARAMS_SUFFIX "DBC_FLAGS"}}'
           IMAGE_BASE: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_BASE"}}'
           IMAGE_TAG: '{{get .ACTION_PARAMS_SUFFIX "IMAGE_TAG"}}'
 
@@ -144,6 +147,7 @@ tasks:
         vars:
           DBC_NAME: '{{get .ACTION_PARAMS_STABLE "DBC_NAME"}}'
           DBC_HOME: '{{get .ACTION_PARAMS_STABLE "DBC_HOME"}}'
+          DBC_FLAGS: '{{get .ACTION_PARAMS_STABLE "DBC_FLAGS"}}'
           IMAGE_BASE: '{{get .ACTION_PARAMS_STABLE "IMAGE_BASE"}}'
           IMAGE_TAG: '{{get .ACTION_PARAMS_STABLE "IMAGE_TAG"}}'
 

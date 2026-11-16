@@ -19,7 +19,8 @@ the image.
   variables (see below). Every variable can be overridden before login.
 - `scripts/genkeys.sh` - generates own signing keys (never overwrites).
 - `scripts/signbuild.sh` - build + sign + create ota zip.
-- `build.sh` - `podman build -f Dockerfile -t droid .`
+- `Taskfile.yml` - container definition for the shared tasks in `../tasks`.
+- `build.sh` - `podman build -f Dockerfile -t droid ..` (context is the repo root).
 
 ### Variables (defaults in `droidenv.sh`)
 
@@ -43,14 +44,18 @@ Image-level variables (Dockerfile): `EVDOCKER_SCRIPTSDIR`, `EVDOCKER_SDK`,
 
 ## Create the container
 
+Run from this directory (same tasks as `go`, `fsharp`):
+
 ```
-./build.sh
-distrobox create \
-  --name droidbuilder \
-  --home <dedicated home directory> \
-  --image localhost/droid:latest
-distrobox enter droidbuilder
+task rebuild:all     # remove container, rebuild image, create container
+task rebuild:dbc     # recreate container only
+distrobox enter droidtesting
 ```
+
+The container is `droidtesting` (home `~/homes/droidtesting`), created with
+`--additional-flags "--device /dev/kvm --group-add keep-groups"` (emulator
+acceleration). The flags are defined in `Taskfile.yml` (`CNT_FLAGS`); if
+needed, add `--group-add render --group-add video` there.
 
 The phone must be accessible from the container (distrobox shares host
 devices) - udev rule on the host, e.g. `/etc/udev/rules.d/51-android.rules`:

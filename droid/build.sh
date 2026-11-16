@@ -4,4 +4,4 @@
 # docker build -t jekyllghpages .
 
 cmd=$1
-podman build -f Dockerfile -t droid .
+podman build -f Dockerfile -t droid ..

@@ -4,6 +4,8 @@ vars:
   CNT_NAME: "androidstudio"
   CNT_BOOTSTRAP: "/opt/scripts/setup.sh"
   CNT_APP: "android-studio"
+  # KVM for emulator; if needed (backend-dependent) add: --group-add render --group-add video
+  CNT_FLAGS: "--device /dev/kvm --group-add keep-groups"
 
 includes:
   actions:

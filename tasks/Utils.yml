@@ -44,7 +44,7 @@ tasks:
     desc: Create a new Distrobox container
     internal: true
     cmds:
-      - distrobox create --name {{.DBC_NAME}} --home {{.DBC_HOME}} --image {{.IMAGE_BASE}}:{{.IMAGE_TAG}}
+      - distrobox create --name {{.DBC_NAME}} --home {{.DBC_HOME}} --image {{.IMAGE_BASE}}:{{.IMAGE_TAG}}{{if .DBC_FLAGS}} --additional-flags "{{.DBC_FLAGS}}"{{end}}
 
   dbc-exec-cmd:
     desc: Executes command inside Distrobox container

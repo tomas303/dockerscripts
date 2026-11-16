@@ -18,7 +18,7 @@ ENV EVDOCKER_SCRIPTSDIR=/opt/scripts \
 
 # Install scripts
 # --------------------
-COPY ./scripts/*.sh $EVDOCKER_SCRIPTSDIR/
+COPY ./droid/scripts/*.sh $EVDOCKER_SCRIPTSDIR/
 RUN chmod a+x $EVDOCKER_SCRIPTSDIR/*.sh
 
 # install tools for build android
